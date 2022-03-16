@@ -7,6 +7,35 @@ blockchain compatibility. You can find the latest test results [here][hive-prod]
 
 **To read more about hive, please check [the documentation][doc].**
 
+# Vulcanize Specific
+This section will go through Vulcanize specific details.
+
+## Setup
+
+1. I highly recommend using the `.devcontainer`. It this moment in time this is the only supported option.
+2. Update line 9 in `.devcontainer/devcontainer.json`, and update your local path to the `vulcanize-geth` repo.
+3. `cd clients/vulcanize-geth`
+4. `./build_foundry.sh`
+5. `docker compose up --build`
+
+## Running Tests
+Once the DB container is running locally, you can run tests by:
+```
+./hive --sim devp2p --client vulcanize-geth
+```
+
+You can also use the provided console by running:
+```
+./hiveview --serve --logdir ./workspace/logs
+```
+
+## Reset the DB
+To reset the DB do the following in the shell which you utilized to run `docker compose up --build`.
+
+1. `Ctrl + c`
+2. `docker-compose down`
+3. `docker volume rm vulcanize-geth_vdb_db_eth_server`
+
 ### Trophies
 
 If you find a bug in your client implementation due to this project, please be so kind as
